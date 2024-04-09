@@ -144,17 +144,13 @@ async function renderDiagrams({
         d3.select(`#${id}`).datum(diagram).call(chart)
 
         const [element] = root.getElementsByTagName('svg')
-        const { height, width } = element.viewBox.baseVal
-
-        // Xif (screenshot) {
-        //   document.body.append(root)
-        // }
+        const { height, width } = element
 
         const result: RenderResult = {
-          height,
+          height: height.baseVal.value,
           id,
           svg: serializer.serializeToString(element),
-          width
+          width: width.baseVal.value
         }
 
         return result
