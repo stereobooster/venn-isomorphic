@@ -1,7 +1,7 @@
 import { createRequire } from 'node:module'
-import { pathToFileURL } from 'node:url'
 
-import { type Mermaid, type MermaidConfig } from 'mermaid'
+import type * as Venn from '@upsetjs/venn.js'
+import type * as D3 from 'd3'
 import {
   type Browser,
   type BrowserType,
@@ -10,17 +10,15 @@ import {
   type Page
 } from 'playwright-core'
 
-declare const mermaid: Mermaid
+declare const venn: typeof Venn
+declare const d3: typeof D3
 
 const require = createRequire(import.meta.url)
 const html = String(new URL('../index.html', import.meta.url))
-const mermaidScript = { path: require.resolve('mermaid/dist/mermaid.js') }
-const faStyle = {
-  // We use url, not path. If we use path, the fonts can’t be resolved.
-  url: String(pathToFileURL(require.resolve('@fortawesome/fontawesome-free/css/all.css')))
-}
+const d3Script = { path: require.resolve('d3/dist/d3.js') }
+const vennScript = { path: require.resolve('@upsetjs/venn.js/build/venn.js') }
 
-export interface CreateMermaidRendererOptions {
+export interface CreateVennRendererOptions {
   /**
    * The Playwright browser to use.
    *
@@ -35,11 +33,6 @@ export interface CreateMermaidRendererOptions {
 }
 
 export interface RenderResult {
-  /**
-   * The aria description of the diagram.
-   */
-  description?: string
-
   /**
    * The height of the resulting SVG.
    */
@@ -59,11 +52,6 @@ export interface RenderResult {
    * The diagram rendered as an SVG.
    */
   svg: string
-
-  /**
-   * The title of the rendered diagram.
-   */
-  title?: string
 
   /**
    * The width of the resulting SVG.
@@ -89,115 +77,84 @@ export interface RenderOptions {
   screenshot?: boolean
 
   /**
-   * The mermaid configuration.
+   * The venn configuration.
    *
    * By default `fontFamily` is set to `arial,sans-serif`.
    *
-   * This option is ignored in the browser. You need to call `mermaid.initialize()` manually.
+   * This option is ignored in the browser. You need to call `venn.initialize()` manually.
    */
-  mermaidConfig?: MermaidConfig
+  vennConfig?: Venn.IVennDiagramOptions
 
   /**
    * The prefix of the id.
    *
-   * @default 'mermaid'
+   * @default 'venn'
    */
   prefix?: string | undefined
 }
 
 /**
- * Render Mermaid diagrams in the browser.
+ * Render Venn diagrams in the browser.
  *
- * @param diagrams The Mermaid diagrams to render.
+ * @param diagrams The Venn diagrams to render.
  * @param options Additional options to use when rendering the diagrams.
- * @returns A list of settled promises that contains the rendered Mermaid diagram. Each result
+ * @returns A list of settled promises that contains the rendered Venn diagram. Each result
  *   matches the same index of the input diagrams.
  */
-export type MermaidRenderer = (
-  diagrams: string[],
+export type VennRenderer = (
+  diagrams: Venn.ISetOverlap[][],
   options?: RenderOptions
 ) => Promise<PromiseSettledResult<RenderResult>[]>
 
 interface RenderDiagramsOptions
-  extends Required<Pick<RenderOptions, 'mermaidConfig' | 'prefix' | 'screenshot'>> {
+  extends Required<Pick<RenderOptions, 'prefix' | 'screenshot' | 'vennConfig'>> {
   /**
    * The diagrams to process.
    */
-  diagrams: string[]
+  diagrams: Venn.ISetOverlap[][]
 }
 
 /* c8 ignore start */
 /**
- * Render mermaid diagrams in the browser.
+ * Render venn diagrams in the browser.
  *
  * @param options The options used to render the diagrams
  * @returns A settled promise that holds the rendering results.
  */
 async function renderDiagrams({
   diagrams,
-  mermaidConfig,
   prefix,
-  screenshot
+  vennConfig
 }: RenderDiagramsOptions): Promise<PromiseSettledResult<RenderResult>[]> {
   await Promise.all(Array.from(document.fonts, (font) => font.load()))
-  const parser = new DOMParser()
   const serializer = new XMLSerializer()
 
-  mermaid.initialize(mermaidConfig)
-
-  /**
-   * Get an aria value form a referencing attribute.
-   *
-   * @param element The SVG element the get the value from.
-   * @param attribute The attribute whose value to get.
-   * @returns The aria value.
-   */
-  // eslint-disable-next-line unicorn/consistent-function-scoping
-  function getAriaValue(element: SVGSVGElement, attribute: string): string | undefined {
-    const value = element.getAttribute(attribute)
-    if (!value) {
-      return
-    }
-
-    let result = ''
-    for (const id of value.split(/\s+/)) {
-      const node = element.getElementById(id)
-      if (node) {
-        result += node.textContent
-      }
-    }
-    return result
-  }
+  const chart = venn.VennDiagram(vennConfig)
 
   return Promise.allSettled(
-    diagrams.map(async (diagram, index) => {
+    diagrams.map((diagram, index) => {
       const id = `${prefix}-${index}`
 
       try {
-        const { svg } = await mermaid.render(id, diagram)
-        const root = parser.parseFromString(svg, 'text/html')
+        const root = document.createElement('div')
+        root.id = id
+        document.body.append(root)
+        // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+        // @ts-ignore
+        d3.select(`#${id}`).datum(diagram).call(chart)
+
         const [element] = root.getElementsByTagName('svg')
         const { height, width } = element.viewBox.baseVal
-        const description = getAriaValue(element, 'aria-describedby')
-        const title = getAriaValue(element, 'aria-labelledby')
 
-        if (screenshot) {
-          document.body.append(element)
-        }
+        // Xif (screenshot) {
+        //   document.body.append(root)
+        // }
 
         const result: RenderResult = {
           height,
           id,
           svg: serializer.serializeToString(element),
           width
-        }
-
-        if (description) {
-          result.description = description
-        }
-
-        if (title) {
-          result.title = title
         }
 
         return result
@@ -213,16 +170,16 @@ async function renderDiagrams({
 /* c8 ignore stop */
 
 /**
- * Create a Mermaid renderer.
+ * Create a Venn renderer.
  *
- * The Mermaid renderer manages a browser instance. If multiple diagrams are being rendered
+ * The Venn renderer manages a browser instance. If multiple diagrams are being rendered
  * simultaneously, the internal browser instance will be re-used. If no diagrams are being rendered,
  * the browser will be closed.
  *
- * @param options The options of the Mermaid renderer.
- * @returns A function that renders Mermaid diagrams in the browser.
+ * @param options The options of the Venn renderer.
+ * @returns A function that renders Venn diagrams in the browser.
  */
-export function createMermaidRenderer(options: CreateMermaidRendererOptions = {}): MermaidRenderer {
+export function createVennRenderer(options: CreateVennRendererOptions = {}): VennRenderer {
   const { browser = chromium, launchOptions } = options
 
   let browserPromise: Promise<Browser> | undefined
@@ -242,7 +199,7 @@ export function createMermaidRenderer(options: CreateMermaidRendererOptions = {}
     try {
       page = await browserInstance.newPage({ bypassCSP: true })
       await page.goto(html)
-      const promises = [page.addStyleTag(faStyle), page.addScriptTag(mermaidScript)]
+      const promises = [page.addScriptTag(d3Script), page.addScriptTag(vennScript)]
       if (renderOptions?.css) {
         promises.push(page.addStyleTag({ url: String(renderOptions.css) }))
       }
@@ -251,11 +208,8 @@ export function createMermaidRenderer(options: CreateMermaidRendererOptions = {}
       renderResults = await page.evaluate(renderDiagrams, {
         diagrams,
         screenshot: Boolean(renderOptions?.screenshot),
-        mermaidConfig: {
-          fontFamily: 'arial,sans-serif',
-          ...renderOptions?.mermaidConfig
-        },
-        prefix: renderOptions?.prefix ?? 'mermaid'
+        vennConfig: renderOptions?.vennConfig || {},
+        prefix: renderOptions?.prefix ?? 'venn'
       })
       if (renderOptions?.screenshot) {
         for (const result of renderResults) {

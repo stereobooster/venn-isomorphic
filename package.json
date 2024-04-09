@@ -1,28 +1,19 @@
 {
-  "name": "mermaid-isomorphic",
-  "version": "2.1.2",
-  "description": "Transform mermaid diagrams in the browser or Node.js",
-  "keywords": [
-    "browser",
-    "isomorphic",
-    "mermaid",
-    "mermaidjs",
-    "node",
-    "nodejs"
-  ],
-  "homepage": "https://github.com/remcohaszing/mermaid-isomorphic#readme",
-  "bugs": "https://github.com/remcohaszing/mermaid-isomorphic/issues",
-  "repository": "remcohaszing/mermaid-isomorphic",
-  "funding": "https://github.com/sponsors/remcohaszing",
+  "name": "venn-isomorphic",
+  "version": "0.0.1",
+  "description": "Render Euler, Venn diagrams in Node.js",
+  "keywords": [],
+  "homepage": "https://github.com/stereobooster/venn-isomorphic#readme",
+  "bugs": "https://github.com/stereobooster/venn-isomorphic/issues",
+  "repository": "stereobooster/venn-isomorphic",
   "license": "MIT",
-  "author": "Remco Haszing <remcohaszing@gmail.com>",
+  "author": "stereobooster",
   "sideEffects": false,
   "type": "module",
-  "main": "./dist/mermaid-isomorphic.js",
+  "main": "./dist/venn-isomorphic.js",
   "exports": {
     ".": {
-      "browser": "./dist/browser.js",
-      "default": "./dist/mermaid-isomorphic.js"
+      "default": "./dist/venn-isomorphic.js"
     }
   },
   "files": [
@@ -37,20 +28,21 @@
     "test": "c8 node --enable-source-maps dist/test.js"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.0.0",
-    "mermaid": "^10.0.0",
+    "@upsetjs/venn.js": "^1.4.2",
+    "d3": "^6.0.0",
     "playwright-core": "^1.0.0"
   },
   "devDependencies": {
     "@fontsource/irish-grover": "^5.0.0",
+    "@types/d3": "^7.4.3",
     "@types/node": "^20.0.0",
     "c8": "^9.0.0",
     "esbuild": "^0.20.0",
     "eslint": "^8.0.0",
-    "eslint-config-remcohaszing": "^10.0.0",
+    "eslint-config-stereobooster": "^10.0.0",
     "prettier": "^3.0.0",
     "remark-cli": "^11.0.0",
-    "remark-preset-remcohaszing": "^2.0.0",
+    "remark-preset-stereobooster": "^2.0.0",
     "typescript": "^5.0.0"
   }
 }

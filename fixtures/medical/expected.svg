@@ -1,0 +1,234 @@
+<!--
+{
+  "height": 0,
+  "id": "venn-0",
+  "width": 0
+}
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="350">
+  <g class="venn-area venn-circle" data-venn-sets="0">
+    <path
+      d="&#10;M 334.1904643755872 141.86510602534668 &#10;m -58.771936801039985 0 &#10;a 58.771936801039985 58.771936801039985 0 1 0 117.54387360207997 0 &#10;a 58.771936801039985 58.771936801039985 0 1 0 -117.54387360207997 0"
+      style="fill-opacity: 0.25; fill: rgb(31, 119, 180)"
+    />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="325"
+      y="109"
+      style="fill: rgb(31, 119, 180)"
+    >
+      <tspan x="325" y="109" dy="0.35em">SE 28</tspan>
+    </text>
+  </g>
+  <g class="venn-area venn-circle" data-venn-sets="1">
+    <path
+      d="&#10;M 238.8201409055951 80.70902292822346 &#10;m -65.70902292822346 0 &#10;a 65.70902292822346 65.70902292822346 0 1 0 131.41804585644692 0 &#10;a 65.70902292822346 65.70902292822346 0 1 0 -131.41804585644692 0"
+      style="fill-opacity: 0.25; fill: rgb(255, 127, 14)"
+    />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="244"
+      y="64"
+      style="fill: rgb(255, 127, 14)"
+    >
+      <tspan x="244" y="64" dy="0.35em">Treat 35</tspan>
+    </text>
+  </g>
+  <g class="venn-area venn-circle" data-venn-sets="2">
+    <path
+      d="&#10;M 190.266315396594 219.5742075157458 &#10;m -115.4257924842542 0 &#10;a 115.4257924842542 115.4257924842542 0 1 0 230.8515849685084 0 &#10;a 115.4257924842542 115.4257924842542 0 1 0 -230.8515849685084 0"
+      style="fill-opacity: 0.25; fill: rgb(44, 160, 44)"
+    />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="184"
+      y="235"
+      style="fill: rgb(44, 160, 44)"
+    >
+      <tspan x="184" y="235" dy="0.35em">Anti-CCP 108</tspan>
+    </text>
+  </g>
+  <g class="venn-area venn-circle" data-venn-sets="3">
+    <path
+      d="&#10;M 410.8074362434484 219.5742075157457 &#10;m -114.35204084421186 0 &#10;a 114.35204084421186 114.35204084421186 0 1 0 228.7040816884237 0 &#10;a 114.35204084421186 114.35204084421186 0 1 0 -228.7040816884237 0"
+      style="fill-opacity: 0.25; fill: rgb(214, 39, 40)"
+    />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="433"
+      y="242"
+      style="fill: rgb(214, 39, 40)"
+    >
+      <tspan x="433" y="242" dy="0.35em">DAS28 106</tspan>
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="0_1">
+    <path
+      d="&#10;M 275.8195500259194 135.01113540028723 &#10;A 58.771936801039985 58.771936801039985 0 0 1 303.6072609217989 91.67737623160497 &#10;A 65.70902292822346 65.70902292822346 0 0 1 275.8195500259194 135.01113540028723"
+      style="fill-opacity: 0"
+    />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="289"
+      y="113"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="289" y="113" dy="0.35em">1</tspan>
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="0_2">
+    <path
+      d="&#10;M 275.418920407064 141.65022256535335 &#10;A 115.4257924842542 115.4257924842542 0 0 1 302.1306229431216 191.12266506627557 &#10;A 58.771936801039985 58.771936801039985 0 0 1 275.418920407064 141.65022256535335"
+      style="fill-opacity: 0"
+    />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="287"
+      y="167"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="287" y="167" dy="0.35em">1</tspan>
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="0_3">
+    <path
+      d="&#10;M 300.36530127969894 189.92755391225725 &#10;A 114.35204084421186 114.35204084421186 0 0 1 382.7268201119187 108.72355012973847 &#10;A 58.771936801039985 58.771936801039985 0 0 1 300.36530127969894 189.92755391225725"
+      style="fill-opacity: 0"
+    />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="352"
+      y="160"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="352" y="160" dy="0.35em">14</tspan>
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="1_2">
+    <path
+      d="&#10;M 177.70026978648303 104.83446693584591 &#10;A 115.4257924842542 115.4257924842542 0 0 1 271.5908067868728 137.66303202222366 &#10;A 65.70902292822346 65.70902292822346 0 0 1 177.70026978648303 104.83446693584591"
+      style="fill-opacity: 0"
+    />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="222"
+      y="126"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="222" y="126" dy="0.35em">6</tspan>
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="1_3">
+    <path d="M 0 0" style="fill-opacity: 0" />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="0"
+      y="-1000"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="0" y="-1000" dy="0.35em" />
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="2_3">
+    <path
+      d="&#10;M 301.0962370956745 251.82078914533545 &#10;A 114.35204084421186 114.35204084421186 0 0 1 301.0962370956745 187.32762588615603 &#10;A 115.4257924842542 115.4257924842542 0 0 1 301.0962370956745 251.82078914533545"
+      style="fill-opacity: 0"
+    />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="301"
+      y="219"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="301" y="219" dy="0.35em">1</tspan>
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="0_2_3">
+    <path
+      d="&#10;M 301.0962370956745 187.32762588615603 &#10;A 115.4257924842542 115.4257924842542 0 0 1 302.1306229431216 191.12266506627557 &#10;A 58.771936801039985 58.771936801039985 0 0 1 300.36530127969894 189.92755391225725 &#10;A 114.35204084421186 114.35204084421186 0 0 1 301.0962370956745 187.32762588615603"
+      style="fill-opacity: 0"
+    />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="301"
+      y="189"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="301" y="189" dy="0.35em">1</tspan>
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="0_1_2">
+    <path d="M 0 0" style="fill-opacity: 0" />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="0"
+      y="-1000"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="0" y="-1000" dy="0.35em" />
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="0_1_3">
+    <path d="M 0 0" style="fill-opacity: 0" />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="0"
+      y="-1000"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="0" y="-1000" dy="0.35em" />
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="1_2_3">
+    <path d="M 0 0" style="fill-opacity: 0" />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="0"
+      y="-1000"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="0" y="-1000" dy="0.35em" />
+    </text>
+  </g>
+  <g class="venn-area venn-intersection" data-venn-sets="0_1_2_3">
+    <path d="M 0 0" style="fill-opacity: 0" />
+    <text
+      class="label"
+      text-anchor="middle"
+      dy=".35em"
+      x="0"
+      y="-1000"
+      style="fill: rgb(68, 68, 68)"
+    >
+      <tspan x="0" y="-1000" dy="0.35em" />
+    </text>
+  </g>
+</svg>
