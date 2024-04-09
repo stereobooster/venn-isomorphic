@@ -9,7 +9,7 @@ Code structure taken from https://github.com/remcohaszing/mermaid-isomorphic
 
 ## Notes
 
-- Algorithm is not stable, so tests doesn't work
+- Algorithm is not stable, so tests doesn't work (svg output everytime is different)
 - Not exposed: `wrap`, `useViewBox`, `width`, `height`, `padding`, `colours`, `colors`, `fontSize`,
   `normalize`, `layoutFunction`, `scaleToFit`, `styled`, `round`, `distinct`, `orientation`,
   `orientationOrder`, `lossFunction`

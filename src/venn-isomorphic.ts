@@ -10,6 +10,9 @@ import {
   type Page
 } from 'playwright-core'
 
+type ISetOverlap = Venn.ISetOverlap
+export { ISetOverlap }
+
 declare const venn: typeof Venn
 declare const d3: typeof D3
 
