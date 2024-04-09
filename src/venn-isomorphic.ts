@@ -138,6 +138,7 @@ async function renderDiagrams({
       try {
         const root = document.createElement('div')
         root.id = id
+        root.style.width = 'fit-content'
         document.body.append(root)
         // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
         // @ts-ignore
