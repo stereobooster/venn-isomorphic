@@ -127,12 +127,16 @@ interface RenderDiagramsOptions
 async function renderDiagrams({
   diagrams,
   prefix,
+  screenshot,
   vennConfig
 }: RenderDiagramsOptions): Promise<PromiseSettledResult<RenderResult>[]> {
   await Promise.all(Array.from(document.fonts, (font) => font.load()))
   const serializer = new XMLSerializer()
 
   const chart = venn.VennDiagram(vennConfig)
+  if (!screenshot) {
+    chart.useViewBox()
+  }
 
   return Promise.allSettled(
     diagrams.map((diagram, index) => {
@@ -148,13 +152,21 @@ async function renderDiagrams({
         d3.select(`#${id}`).datum(diagram).call(chart)
 
         const [element] = root.getElementsByTagName('svg')
-        const { height, width } = element
+        let width = 0
+        let height = 0
+        if (screenshot) {
+          height = element.height.baseVal.value
+          width = element.width.baseVal.value
+        } else {
+          height = element.viewBox.baseVal.height
+          width = element.viewBox.baseVal.width
+        }
 
         const result: RenderResult = {
-          height: height.baseVal.value,
+          height,
           id,
           svg: serializer.serializeToString(element),
-          width: width.baseVal.value
+          width
         }
 
         return result

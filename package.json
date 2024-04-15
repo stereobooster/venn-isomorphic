@@ -1,6 +1,6 @@
 {
   "name": "venn-isomorphic",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Render Euler, Venn diagrams in Node.js",
   "keywords": [],
   "homepage": "https://github.com/stereobooster/venn-isomorphic#readme",
